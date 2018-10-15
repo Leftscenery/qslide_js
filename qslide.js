@@ -50,8 +50,8 @@ document.write("<link rel='stylesheet' href='qslide.css' type='text/css' media='
         this.imgHolder = null;
         this.dotHolder = null;
         this.arrows = this.targetHolder.getElementsByClassName('slide_js_arrow');
-        this.holderHeight = $u(this.targetHolder).css('height');
-        this.holderWidth = $u(this.targetHolder).css('width');
+        this.holderHeight = _Qslide(this.targetHolder).css('height');
+        this.holderWidth = _Qslide(this.targetHolder).css('width');
         this.leftArrow = null;
         this.rightArrow = null;
         this.imgs = null;
@@ -79,19 +79,19 @@ document.write("<link rel='stylesheet' href='qslide.css' type='text/css' media='
     function prepareSize(self) {
         for (let i = 0; i < self.imgs.length; i++) {
 
-            $u(self.imgs[i]).css('width', self.holderWidth);
-            $u(self.imgs[i]).css('height', self.holderHeight);
+            _Qslide(self.imgs[i]).css('width', self.holderWidth);
+            _Qslide(self.imgs[i]).css('height', self.holderHeight);
 
             //set scroll holder
-            self.mode == 'scroll' ? $u(self.imgHolder).css({
+            self.mode == 'scroll' ? _Qslide(self.imgHolder).css({
                 'width': self.holderWidth * (self.imgs.length),
                 'height': self.holderHeight
-            }) : $u(self.imgHolder).css({'width': self.holderWidth, 'height': self.holderHeight})
-            $u(self.imgHolder).css('height', self.holderHeight);
+            }) : _Qslide(self.imgHolder).css({'width': self.holderWidth, 'height': self.holderHeight})
+            _Qslide(self.imgHolder).css('height', self.holderHeight);
 
             //nav dots position
-            $u(self.dotHolder).css('marginLeft', -$u(self.dotHolder).css('width') / 2);
-            $u(self.dotHolder).css('bottom', $u(self.holderHeight) >= 300 ? 15 : $u(self.holderHeight) / 30);
+            _Qslide(self.dotHolder).css('marginLeft', -_Qslide(self.dotHolder).css('width') / 2);
+            _Qslide(self.dotHolder).css('bottom', _Qslide(self.holderHeight) >= 300 ? 15 : _Qslide(self.holderHeight) / 30);
 
             if(self.pluginMode == 'custom'){
                 continue;
@@ -110,12 +110,12 @@ document.write("<link rel='stylesheet' href='qslide.css' type='text/css' media='
                     self.imgInImgs[i].style.height = 'auto';
                     if (img.width < self.holderWidth) {
                         if (self.stretchImg) {
-                            $u(self.imgInImgs[i]).css('width', self.holderWidth);
+                            _Qslide(self.imgInImgs[i]).css('width', self.holderWidth);
                         } else {
-                            $u(self.imgInImgs[i]).css('width', img.width);
+                            _Qslide(self.imgInImgs[i]).css('width', img.width);
                         }
                     } else {
-                        $u(self.imgInImgs[i]).css('width', self.holderWidth);
+                        _Qslide(self.imgInImgs[i]).css('width', self.holderWidth);
                     }
                 } else if (temp < 0) {
                     //height
@@ -123,21 +123,21 @@ document.write("<link rel='stylesheet' href='qslide.css' type='text/css' media='
                     self.imgInImgs[i].style.width = 'auto';
                     if (img.height - self.holderHeight < 0) {
                         if (self.stretchImg) {
-                            $u(self.imgInImgs[i]).css('height', self.holderHeight);
+                            _Qslide(self.imgInImgs[i]).css('height', self.holderHeight);
                         } else {
-                            $u(self.imgInImgs[i]).css('height', img.height);
+                            _Qslide(self.imgInImgs[i]).css('height', img.height);
                         }
                     } else {
-                        $u(self.imgInImgs[i]).css('height', self.holderHeight);
+                        _Qslide(self.imgInImgs[i]).css('height', self.holderHeight);
                     }
                 }
 
                 //center
-                if ((self.holderHeight - $u(self.imgInImgs[i]).css('height')) >= 0) {
-                    $u(self.imgInImgs[i]).css('top', (self.holderHeight - $u(self.imgInImgs[i]).css('height')) / 2);
+                if ((self.holderHeight - _Qslide(self.imgInImgs[i]).css('height')) >= 0) {
+                    _Qslide(self.imgInImgs[i]).css('top', (self.holderHeight - _Qslide(self.imgInImgs[i]).css('height')) / 2);
                 }
-                if ((self.holderWidth - $u(self.imgInImgs[i]).css('width')) >= 0) {
-                    $u(self.imgInImgs[i]).css('left', (self.holderWidth - $u(self.imgInImgs[i]).css('width')) / 2);
+                if ((self.holderWidth - _Qslide(self.imgInImgs[i]).css('width')) >= 0) {
+                    _Qslide(self.imgInImgs[i]).css('left', (self.holderWidth - _Qslide(self.imgInImgs[i]).css('width')) / 2);
                 }
 
                 img = null;
@@ -152,13 +152,13 @@ document.write("<link rel='stylesheet' href='qslide.css' type='text/css' media='
                 //current last, click next
                 if ((targetStep == self.imgs.length) && (currentStep == self.imgs.length-1)) {
                     self.dots[0].classList.remove('slide_js_dot_select');
-                    $u(self.imgHolder).css('left', 0);
+                    _Qslide(self.imgHolder).css('left', 0);
                     targetStep = 1;
                     self.dots[targetStep].classList.add('slide_js_dot_select');
                 } else if (targetStep == -1 && currentStep == 0) {
                     //current first, next last
                     targetStep = self.imgs.length - 2;
-                    $u(self.imgHolder).css('left', (self.imgs.length-1) * (-self.holderWidth));
+                    _Qslide(self.imgHolder).css('left', (self.imgs.length-1) * (-self.holderWidth));
                     self.dots[currentStep].classList.remove('slide_js_dot_select');
                     self.dots[targetStep].classList.add('slide_js_dot_select');
                 } else if (targetStep == self.imgs.length-1) {
@@ -171,10 +171,10 @@ document.write("<link rel='stylesheet' href='qslide.css' type='text/css' media='
                 }
                 switch (self.scrollAnimation) {
                     case 'smooth':
-                        $u(self.imgHolder).animation({left: targetStep * (-self.holderWidth)}, duration, 1, callback);
+                        _Qslide(self.imgHolder).animation({left: targetStep * (-self.holderWidth)}, duration, 1, callback);
                         break;
                     case 'linear':
-                        $u(self.imgHolder).animation({left: targetStep * (-self.holderWidth)}, duration, 0, callback);
+                        _Qslide(self.imgHolder).animation({left: targetStep * (-self.holderWidth)}, duration, 0, callback);
                         break;
                     default:
                         break;
@@ -189,12 +189,12 @@ document.write("<link rel='stylesheet' href='qslide.css' type='text/css' media='
                     //back from first
                     targetStep = self.imgs.length - 1;
                 }
-                $u(self.imgs[currentStep]).animation({opacity: 0}, duration);
+                _Qslide(self.imgs[currentStep]).animation({opacity: 0}, duration);
                 self.imgs[currentStep].style.zIndex = -1;
                 self.dots[currentStep].classList.remove('slide_js_dot_select');
                 self.dots[targetStep].classList.add('slide_js_dot_select');
                 self.imgs[targetStep].style.zIndex = 1;
-                $u(self.imgs[targetStep]).animation({opacity: 1}, duration, callback);
+                _Qslide(self.imgs[targetStep]).animation({opacity: 1}, duration, callback);
                 self.step = targetStep;
                 break;
             default:
@@ -212,7 +212,7 @@ document.write("<link rel='stylesheet' href='qslide.css' type='text/css' media='
         let tempStr = '';
 
         //check position
-        $u(self.targetHolder).css('position') == 'static' ? $u(self.targetHolder).css('position', 'relative') : null;
+        _Qslide(self.targetHolder).css('position') == 'static' ? _Qslide(self.targetHolder).css('position', 'relative') : null;
 
         //bind
         self.targetHolder.classList.add('slide_js_outerHolder');
@@ -289,14 +289,14 @@ document.write("<link rel='stylesheet' href='qslide.css' type='text/css' media='
     //init
     function init(self) {
         //nav dot switch
-        self.navDot == true ? $u(self.dotHolder).css('display', 'block') : $u(self.dotHolder).css('display', 'none');
+        self.navDot == true ? _Qslide(self.dotHolder).css('display', 'block') : _Qslide(self.dotHolder).css('display', 'none');
 
         //arrow switch
         for (let i = 0; i < self.arrows.length; i++) {
             if (self.arrow == true) {
-                $u(self.arrows[i]).css('display', 'block');
+                _Qslide(self.arrows[i]).css('display', 'block');
             } else {
-                $u(self.arrows[i]).css('display', 'none');
+                _Qslide(self.arrows[i]).css('display', 'none');
             }
         }
 
@@ -306,7 +306,7 @@ document.write("<link rel='stylesheet' href='qslide.css' type='text/css' media='
             //scroll part
         } else if (self.mode == 'trans') {
             //trans part
-            $u(self.imgs[self.step]).css('opacity', 1);
+            _Qslide(self.imgs[self.step]).css('opacity', 1);
         }
     };
 
@@ -420,8 +420,8 @@ document.write("<link rel='stylesheet' href='qslide.css' type='text/css' media='
                 console.log('here');
                 clearInterval(self.timer);
 
-                self.holderHeight = $u(self.targetHolder).css('height');
-                self.holderWidth = $u(self.targetHolder).css('width');
+                self.holderHeight = _Qslide(self.targetHolder).css('height');
+                self.holderWidth = _Qslide(self.targetHolder).css('width');
                 prepareSize(self);
 
                 //reset

@@ -385,5 +385,5 @@ $.ajax({
     };
 
     //export
-    window.$u = Utils;
+    window._Qslide = Utils;
 }();
